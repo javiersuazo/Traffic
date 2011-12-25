@@ -1,0 +1,33 @@
+<h3>Create an alert...</h3>
+<div class = "formit">
+<div class = "imagen"></div>
+<div class = "formulario">
+<%=semantic_form_for @alert do |f|%>
+<%=f.inputs do%>
+<%=f.input :lugar, :label => "Where!"%>
+<%=f.input :content, :as => :text,:input_html => { :class => 'autogrow', :rows => 3, :cols => 10}, :label => "What happened there!!" %>
+<%end%>
+<% f.buttons do %>
+<%= f.commit_button "Create Alert" %>
+<% end %>
+
+<%end%>
+</div>
+</div>
+
+<%if @alertas.size > 0 %>
+<h3>Watch them all...</h3>
+<%end%>
+
+
+<%@alertas.each do |t|%>
+<span class ="alerta">
+<strong><%=t.lugar%></strong><br/>
+<%=t.content%> 
+<br/>
+<h6><%=link_to  "See", alert_path(t)%> created: <%=distance_of_time_in_words DateTime.now, t.created_at%> ago. <%=link_to "Comment", new_alert_comment_path(t.id)%></h6>
+</span>
+<%end%>
+
+<%= will_paginate @alertas%>
+

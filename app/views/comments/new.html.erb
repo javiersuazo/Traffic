@@ -1,0 +1,13 @@
+<h1>Create comment for:</h1>
+<h3>Alert in <%=link_to @alert.lugar, alert_path(@alert) %></h3>
+
+<%=semantic_form_for [@alert,@comment] do |f|%>
+<%=f.inputs do%>
+<%=f.input :content, :as => :text,:input_html => { :rows => 3 }, :label => "Write your comment:"%>
+<%end%>
+
+<% f.buttons do %>
+<%= f.commit_button "Create Comment" %>
+<% end %>
+
+<%end%>

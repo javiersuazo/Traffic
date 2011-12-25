@@ -1,0 +1,24 @@
+<div id="wrap">
+  <div id="col1">
+    <h1 id="address"> <%=@alert.lugar %>, Tegucigalpa</h1>
+    <h2 id="content"> <%= @alert.content%> </h2>
+    <!--<input type="button" value="Geocode" onclick="codeAddress()">-->
+    <h3>Comentarios</h3>
+    <%if @comentarios.blank?%>
+      <p>No comments yet... <%=link_to "Be the first", new_alert_comment_path(@alert.id)%></p>
+    <%else%>
+      <ul>
+	  <%@comentarios.each do |t|%>
+	      <li><%=t.content%>, created <%=distance_of_time_in_words DateTime.now,t.created_at%> ago</li>
+	      <br/>
+	  <%end%>
+      </ul>
+      <%= will_paginate @comentarios%>
+      <p><%=link_to "Comment here!!.", new_alert_comment_path(@alert.id)%></p>
+    <%end%>
+  </div>
+
+   <div class= "map">
+  <div id="map_canvas"></div>
+  </div>
+</div>
